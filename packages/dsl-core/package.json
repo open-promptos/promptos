@@ -1,0 +1,30 @@
+{
+  "name": "@promptos/dsl-core",
+  "version": "0.1.0",
+  "description": "Core DSL parser for PromptOS.",
+  "license": "MIT",
+  "author": "open-promptos",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-promptos/promptos.git",
+    "directory": "packages/dsl-core"
+  },
+  "homepage": "https://github.com/open-promptos/promptos",
+  "bugs": {
+    "url": "https://github.com/open-promptos/promptos/issues"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build && npm test"
+  }
+}

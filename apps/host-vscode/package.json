@@ -1,0 +1,92 @@
+{
+  "name": "promptos-vscode",
+  "displayName": "PromptOS",
+  "description": "PromptOS DSL runner and prompt generator for VSCode.",
+  "version": "0.1.1",
+  "publisher": "promptos",
+  "icon": "assets/icon.png",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "promptos.generatePromptFromDsl",
+        "title": "PromptOS: Generate Prompt from DSL",
+        "category": "PromptOS"
+      },
+      {
+        "command": "promptos.runDslFromCurrentLine",
+        "title": "PromptOS: Run DSL from Current Line",
+        "category": "PromptOS"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "promptos.generatePromptFromDsl",
+        "key": "ctrl+alt+p",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "promptos.runDslFromCurrentLine",
+        "key": "ctrl+alt+o",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "PromptOS",
+      "properties": {
+        "promptos.llm.provider": {
+          "type": "string",
+          "default": "openai",
+          "description": "LLM provider id (e.g. openai, openai-compatible, groq). | LLM 提供商标识符。"
+        },
+        "promptos.llm.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for the LLM provider. | LLM 提供商 API 密钥。"
+        },
+        "promptos.llm.model": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "Default LLM model name. | 默认 LLM 模型名称。"
+        },
+        "promptos.llm.baseUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Custom base URL for OpenAI-compatible providers. | OpenAI 兼容提供商的自定义 base URL。"
+        },
+        "promptos.useClipboardAsFallbackContext": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use clipboard as fallback context when no text is selected. | 当没有选中文本时，使用剪贴板作为上下文兜底。"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@promptos/sdk": "workspace:*",
+    "@promptos/llm-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-promptos/promptos.git",
+    "directory": "apps/host-vscode"
+  },
+  "homepage": "https://github.com/open-promptos/promptos",
+  "bugs": {
+    "url": "https://github.com/open-promptos/promptos/issues"
+  }
+}

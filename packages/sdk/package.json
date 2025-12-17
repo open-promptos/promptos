@@ -1,0 +1,36 @@
+{
+  "name": "@promptos/sdk",
+  "version": "0.1.0",
+  "description": "Host SDK for PromptOS (VSCode / CLI / Node).",
+  "license": "MIT",
+  "author": "open-promptos",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-promptos/promptos.git",
+    "directory": "packages/sdk"
+  },
+  "homepage": "https://github.com/open-promptos/promptos",
+  "bugs": {
+    "url": "https://github.com/open-promptos/promptos/issues"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "dependencies": {
+    "@promptos/dsl-core": "workspace:*",
+    "@promptos/abilities": "workspace:*",
+    "@promptos/prompt-writer": "workspace:*",
+    "@promptos/llm-core": "workspace:*"
+  }
+}

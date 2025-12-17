@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    // Target modern JS while keeping good Node 18 compatibility
+    // 目标 ES2020，兼顾 Node 18 的运行环境
+    "target": "ES2020",
+
+    // Use Node-style resolution and commonjs modules by default
+    // 默认使用 Node 风格模块解析和 CommonJS 模块
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+
+    // Emit declarations & source maps for library packages
+    // 为各个库包生成类型声明与 source map
+    "declaration": true,
+    "sourceMap": true,
+
+    // Strict type checking
+    // 开启严格类型检查
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    // Interop & JSON import helpers
+    // 便于与 CommonJS / JSON 模块互操作
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    // Misc safety options
+    // 其他安全性相关选项
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    // Common defaults for library-style packages
+    // 通用库包默认输出目录配置（各包可覆盖）
+    "rootDir": "src",
+    "outDir": "dist",
+    "types": ["node"]
+  },
+  "exclude": ["node_modules", "dist", "build", "**/*.test.ts", "**/*.spec.ts"]
+}

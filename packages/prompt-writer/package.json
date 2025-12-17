@@ -1,0 +1,34 @@
+{
+  "name": "@promptos/prompt-writer",
+  "version": "0.1.0",
+  "description": "Prompt writer abstraction for PromptOS abilities.",
+  "license": "MIT",
+  "author": "open-promptos",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-promptos/promptos.git",
+    "directory": "packages/prompt-writer"
+  },
+  "homepage": "https://github.com/open-promptos/promptos",
+  "bugs": {
+    "url": "https://github.com/open-promptos/promptos/issues"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "dependencies": {
+    "@promptos/dsl-core": "workspace:*",
+    "@promptos/llm-core": "workspace:*"
+  }
+}

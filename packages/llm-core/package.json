@@ -1,0 +1,33 @@
+{
+  "name": "@promptos/llm-core",
+  "version": "0.1.0",
+  "description": "LLM client abstraction and provider integration for PromptOS.",
+  "license": "MIT",
+  "author": "open-promptos",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-promptos/promptos.git",
+    "directory": "packages/llm-core"
+  },
+  "homepage": "https://github.com/open-promptos/promptos",
+  "bugs": {
+    "url": "https://github.com/open-promptos/promptos/issues"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build && npm test"
+  }
+}

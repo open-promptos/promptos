@@ -1,0 +1,28 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#22C55E"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="12" y="12" width="104" height="104" rx="28" fill="url(#bgGrad)"/>
+
+  <rect x="24" y="30" width="80" height="68" rx="16" fill="rgba(255,255,255,0.16)" />
+
+  <!-- >_ -->
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <polyline points="38,60 52,52 38,44" />
+    <line x1="38" y1="70" x2="52" y2="70" />
+  </g>
+
+  <!-- 中间偏里的圆点，刻意远离尖角 (52,52) -->
+  <circle cx="38" cy="52" r="3" fill="#FFFFFF" />
+
+  <circle cx="88" cy="44" r="10" fill="#FFFFFF" opacity="0.9" />
+  <text x="88" y="47" text-anchor="middle" font-size="9"
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        fill="#4F46E5">
+    os
+  </text>
+</svg>
