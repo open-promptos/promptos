@@ -5,6 +5,7 @@
 > A tiny OS layer between humans and large language models.
 >
 > Describe **what** you want with a one-line DSL, let PromptOS compile the prompt.
+> 
 > _(Don't panic. It won't format your drive or blue-screen your PC. It's just a really smart plugin.)_
 
 ---
