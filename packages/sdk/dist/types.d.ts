@@ -39,3 +39,52 @@ export interface GeneratePromptResult {
         selectedText?: string;
     };
 }
+/**
+ * Defines the structure of a .pos (PromptOS) file.
+ * This represents a compiled agentic prompt definition.
+ * * 定义 .pos (PromptOS) 文件的结构。
+ * 这代表了一个已编译的智能 Prompt 定义。
+ */
+export interface PromptOSFile {
+    metadata: {
+        /**
+         * The name of the prompt/agent.
+         * Prompt 或 Agent 的名称。
+         */
+        name: string;
+        /**
+         * Semantic versioning string (e.g., "0.1.0").
+         * 语义化版本号。
+         */
+        version: string;
+        /**
+         * A brief description of what this prompt does.
+         * 简短描述该 Prompt 的功能。
+         */
+        description?: string;
+    };
+    inputs: Array<{
+        /**
+         * The variable name used in the template (e.g., "codeContext").
+         * 模板中使用的变量名。
+         */
+        name: string;
+        /**
+         * The type of input UI to render.
+         * 输入控件的类型。
+         */
+        type: "text" | "select" | "boolean";
+        /**
+         * Default value for this input.
+         * 该输入的默认值。
+         */
+        default?: string;
+    }>;
+    /**
+     * The compiled system prompt template.
+     * Can include Handlebars/Mustache style placeholders like {{variable}}.
+     * * 已编译的系统 Prompt 模板。
+     * 可以包含类似 {{variable}} 的占位符。
+     */
+    template: string;
+}

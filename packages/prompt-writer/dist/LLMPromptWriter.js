@@ -130,20 +130,6 @@ class LLMPromptWriter {
         lines.push("");
         lines.push("[DSL]");
         lines.push(`raw: ${parsedDsl.raw}`);
-        // if (parsedDsl.context) {
-        //   lines.push(`context: ${parsedDsl.context}`);
-        // }
-        // lines.push(`domain: ${parsedDsl.domain}`);
-        // if (parsedDsl.arg !== undefined) {
-        //   lines.push(`arg: ${parsedDsl.arg}`);
-        // } else {
-        //   lines.push("arg: <empty>");
-        // }
-        // lines.push(`subdomain: ${parsedDsl.subdomain}`);
-        // lines.push(`action: ${parsedDsl.action}`);
-        // if (parsedDsl.style) {
-        //   lines.push(`style: ${parsedDsl.style}`);
-        // }
         if (input.parsedDsl.args !== undefined) {
             lines.push(`args: ${input.parsedDsl.args}`);
         }

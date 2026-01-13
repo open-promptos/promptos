@@ -5,7 +5,7 @@
 > A tiny OS layer between humans and large language models.
 >
 > Describe **what** you want with a one-line DSL, let PromptOS compile the prompt.
-> 
+>
 > _(Don't panic. It won't format your drive or blue-screen your PC. It's just a really smart plugin.)_
 > 
 > PromptOS is currently released only through this GitHub repository, the npm scope `@promptos/*`, and the PromptOS VS Code extension; there are no other official release channels.
@@ -100,16 +100,14 @@ PromptOS evolves in three stages:
   - Line-level DSL with `op:` prefix.
   - Output prompt in a new Markdown tab.
 
-### v0.1.1 – LLM Prompt Writer Integration
+### v0.2.0 – Agentic Compiler (Current)
 
-- [ ] `packages/llm-core`:
-  - `LLMClient` abstraction + provider-based `createLLMClient`
-- [ ] `packages/prompt-writer`:
-  - `LLMPromptWriter` using LLMs to **co-author** prompts
-  - `strategy = "llm"` for abilities that leverage LLM prompt writing
-- [ ] Multi-language support helpers.
+- [x] `packages/llm-core`: OpenAI-compatible client & Layered Config.
+- [x] **Intent Compiler**: "Magic Refine" feature to compile natural language into .pos files.
+- [x] **History Manager**: Auto-save prompt iterations to `.promptos/history`.
+- [x] `packages/sdk`: Integrated compiler & history logic.
 
-### v0.1.2 – Cloud Sync, RAG & MCP Design
+### v0.3.0 – Cloud Sync, RAG & MCP Design
 
 - [ ] `docs/backend.md` design:
   - Supabase schema for user profiles & custom abilities

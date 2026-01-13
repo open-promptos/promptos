@@ -98,7 +98,7 @@ export interface BaseLLMConfig {
  * OpenAI 兼容提供商配置（OpenAI / openai-compatible / Groq / Grok）。
  */
 export interface OpenAICompatibleConfig extends BaseLLMConfig {
-  provider: "openai" | "openai-compatible" | "groq" | "grok";
+  provider: LLMProvider;
 }
 
 /**
