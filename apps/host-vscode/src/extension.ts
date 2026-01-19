@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 import {
   handleGeneratePromptFromDsl,
   handleRunDslFromCurrentLine,
+  handleExportAsSkill, // 导入新函数
 } from "./promptosService";
 // 引入 SDK 和 Core 的新功能
 import { compileIntentToPos, saveToHistory } from "@promptos/sdk";
@@ -156,6 +157,17 @@ export function activate(context: vscode.ExtensionContext) {
     generatePromptCmd,
     runDslFromLineCmd,
     refinePromptCmd,
+  );
+
+  // 注册导出命令
+  context.subscriptions.push(
+    vscode.commands.registerCommand("promptos.exportAsSkill", async () => {
+      try {
+        await handleExportAsSkill(context);
+      } catch (err) {
+        vscode.window.showErrorMessage(`Export failed: ${err}`);
+      }
+    }),
   );
 }
 

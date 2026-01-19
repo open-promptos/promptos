@@ -2,7 +2,7 @@
   "name": "promptos-vscode",
   "displayName": "PromptOS",
   "description": "PromptOS DSL runner and prompt generator for VSCode.",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "publisher": "promptos",
   "icon": "assets/icon.png",
   "private": true,
@@ -15,7 +15,7 @@
   "main": "./dist/extension.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests"
   },
   "contributes": {
     "commands": [
@@ -27,6 +27,11 @@
       {
         "command": "promptos.runDslFromCurrentLine",
         "title": "PromptOS: Run DSL from Current Line",
+        "category": "PromptOS"
+      },
+      {
+        "command": "promptos.exportAsSkill",
+        "title": "PromptOS: Export Ability as Agent Skill",
         "category": "PromptOS"
       }
     ],

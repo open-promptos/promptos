@@ -1,6 +1,6 @@
 {
   "name": "@promptos/abilities",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Builtin abilities manifest and loader for PromptOS.",
   "license": "MIT",
   "author": "open-promptos",

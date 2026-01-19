@@ -7,6 +7,7 @@ import type { GeneratePromptArgs } from "@promptos/sdk";
 import type { LLMConfig } from "@promptos/llm-core";
 import { configFromEnv } from "@promptos/llm-core";
 import { builtinAbilities } from "@promptos/abilities";
+import { exportToSkillStandard } from "@promptos/sdk";
 
 /**
  * Normalize provider id from config into a supported LLMConfig["provider"] value.
@@ -406,5 +407,77 @@ export async function handleRunDslFromCurrentLine(
     void vscode.window.showErrorMessage(
       `PromptOS Execution Failed: ${message}`,
     );
+  }
+}
+
+/**
+ * Handle "PromptOS: Export Ability as Agent Skill".
+ * 处理 “导出为标准化 Agent Skill” 命令。
+ */
+export async function handleExportAsSkill(
+  _context: vscode.ExtensionContext,
+): Promise<void> {
+  // 1. 让用户选择要导出的能力 (复用你 handleGeneratePromptFromDsl 的逻辑)
+  const items = builtinAbilities.map((a) => ({
+    label: `$(export) ${a.id}`,
+    description: a.description,
+    ability: a, // 存储完整的 ability 对象
+  }));
+
+  const selectedItem = await vscode.window.showQuickPick(items, {
+    title: "Select Ability to Export as Skill",
+    placeHolder: "Which ability do you want to convert to .agent/skills?",
+  });
+
+  if (!selectedItem) return;
+
+  const ability = selectedItem.ability;
+
+  try {
+    // 2. 获取工作区根目录
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders || workspaceFolders.length === 0) {
+      void vscode.window.showErrorMessage(
+        "No workspace open. 请先打开一个项目文件夹。",
+      );
+      return;
+    }
+    const rootPath = workspaceFolders[0].uri.fsPath;
+
+    // 3. 基本字段校验
+    if (!ability || !ability.id) {
+      void vscode.window.showErrorMessage("Invalid ability selected for export.");
+      return;
+    }
+
+    // 4. 调用 SDK 中的导出逻辑（使用已导入的命名导出）
+    const skill = await exportToSkillStandard(
+      ability,
+      (ability as any).staticPromptTemplate || "",
+    );
+
+    // 5. 规范化目录，避免多余的尾部斜杠导致 path.join 行为不一致
+    const normalizedDir = (skill.directory || "").replace(/\/+$/g, "");
+    const targetDir = path.join(rootPath, normalizedDir);
+
+    // 6. 异步创建目录并写入文件，避免阻塞主线程
+    await fs.promises.mkdir(targetDir, { recursive: true });
+    const filePath = path.join(targetDir, skill.filename);
+    await fs.promises.writeFile(filePath, skill.content, "utf8");
+
+    // 7. 成功反馈
+    const openDoc = "立即查看";
+    const choice = await vscode.window.showInformationMessage(
+      `✅ 已导出至 ${skill.directory}`,
+      openDoc,
+    );
+
+    if (choice === openDoc) {
+      const doc = await vscode.workspace.openTextDocument(filePath);
+      await vscode.window.showTextDocument(doc);
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    void vscode.window.showErrorMessage(`Export Failed: ${message}`);
   }
 }

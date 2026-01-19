@@ -99,3 +99,18 @@ export interface PromptOSFile {
    */
   template: string;
 }
+
+// packages/sdk/src/types.ts
+
+export interface SkillMeta {
+  name: string;
+  description: string;
+  version?: string;
+  author?: string;
+}
+
+export interface SkillPackage {
+  meta: SkillMeta;
+  instructions: string; // 对应 SKILL.md 中的主体内容
+  scripts?: Array<{ name: string; content: string }>; // 可选的配套脚本
+}

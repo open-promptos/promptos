@@ -1,6 +1,6 @@
 {
   "name": "@promptos/llm-core",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "LLM client abstraction and provider integration for PromptOS.",
   "license": "MIT",
   "author": "open-promptos",

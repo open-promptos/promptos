@@ -149,6 +149,15 @@ function activate(context) {
     });
     // Push all commands to subscriptions
     context.subscriptions.push(generatePromptCmd, runDslFromLineCmd, refinePromptCmd);
+    // 注册导出命令
+    context.subscriptions.push(vscode.commands.registerCommand("promptos.exportAsSkill", async () => {
+        try {
+            await (0, promptosService_1.handleExportAsSkill)(context);
+        }
+        catch (err) {
+            vscode.window.showErrorMessage(`Export failed: ${err}`);
+        }
+    }));
 }
 /**
  * Called when the extension is deactivated.

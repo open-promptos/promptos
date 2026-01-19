@@ -1,13 +1,13 @@
 {
   "name": "promptos-monorepo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "PromptOS monorepo - DSL core, abilities, LLM integration and VSCode host.",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
   },
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@10.28.0",
   "workspaces": [
     "packages/*",
     "apps/*",

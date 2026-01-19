@@ -88,3 +88,17 @@ export interface PromptOSFile {
      */
     template: string;
 }
+export interface SkillMeta {
+    name: string;
+    description: string;
+    version?: string;
+    author?: string;
+}
+export interface SkillPackage {
+    meta: SkillMeta;
+    instructions: string;
+    scripts?: Array<{
+        name: string;
+        content: string;
+    }>;
+}

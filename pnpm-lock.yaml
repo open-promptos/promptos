@@ -73,6 +73,9 @@ importers:
       '@promptos/prompt-writer':
         specifier: workspace:*
         version: link:../prompt-writer
+      yaml:
+        specifier: ^2.8.2
+        version: 2.8.2
 
 packages:
 
@@ -958,6 +961,11 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
+  yaml@2.8.2:
+    resolution: {integrity: sha512-mplynKqc1C2hTVYxd0PU2xQAc22TI1vShAYGksCCfxbn/dFwnHTNi1bvYsBTkhdUNtGIf5xNOg938rrSSYvS9A==}
+    engines: {node: '>= 14.6'}
+    hasBin: true
+
 snapshots:
 
   '@babel/runtime@7.28.6': {}
@@ -1787,3 +1795,5 @@ snapshots:
     dependencies:
       siginfo: 2.0.0
       stackback: 0.0.2
+
+  yaml@2.8.2: {}

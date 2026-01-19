@@ -1,6 +1,6 @@
 {
   "name": "@promptos/sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Host SDK for PromptOS (VSCode / CLI / Node).",
   "license": "MIT",
   "author": "open-promptos",
@@ -28,9 +28,10 @@
     "prepublishOnly": "npm run build && npm test"
   },
   "dependencies": {
-    "@promptos/dsl-core": "workspace:*",
     "@promptos/abilities": "workspace:*",
+    "@promptos/dsl-core": "workspace:*",
+    "@promptos/llm-core": "workspace:*",
     "@promptos/prompt-writer": "workspace:*",
-    "@promptos/llm-core": "workspace:*"
+    "yaml": "^2.8.2"
   }
 }

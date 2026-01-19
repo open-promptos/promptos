@@ -26,3 +26,8 @@ export declare function handleGeneratePromptFromDsl(_context: vscode.ExtensionCo
  * * 只需要微调以适应新语法宽容度（目前保持原样即可，SDK 层的解析器会处理新语法）。
  */
 export declare function handleRunDslFromCurrentLine(_context: vscode.ExtensionContext): Promise<void>;
+/**
+ * Handle "PromptOS: Export Ability as Agent Skill".
+ * 处理 “导出为标准化 Agent Skill” 命令。
+ */
+export declare function handleExportAsSkill(_context: vscode.ExtensionContext): Promise<void>;
