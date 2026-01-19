@@ -1,333 +1,107 @@
-# PromptOS
+# PromptOS (v0.2.0: Agentic Compiler)
 
-> Official npm scope is @promptos
->
-> A tiny OS layer between humans and large language models.
->
-> Describe **what** you want with a one-line DSL, let PromptOS compile the prompt.
->
-> _(Don't panic. It won't format your drive or blue-screen your PC. It's just a really smart plugin.)_
-> 
-> PromptOS is currently released only through this GitHub repository, the npm scope `@promptos/*`, and the PromptOS VS Code extension; there are no other official release channels.
-
-
----
+- Official npm scope is `@promptos`
+- A tiny OS layer between humans and large language models.
+- **Intent -> DSL -> High-quality Prompt -> Standardized Agent Skill.**
 
 ## 1. What is PromptOS?
 
-PromptOS is a small “OS layer” that sits between:
+PromptOS is an **Agentic Infrastructure Layer** that translates human intent into high-performance, standardized instructions for the AI era.
 
-- **Humans** with messy, evolving intents (review this API, write this spec, design a learning plan…)
-- **LLMs / Agent runtimes** (OpenAI, Groq, OpenAI-compatible APIs, MCP-based tools, etc.)
+In v0.2.0, PromptOS has evolved from a simple DSL runner into a **Skill Factory**. It provides a complete pipeline:
 
-Instead of manually crafting long prompts, users write a **compact DSL command** like:
-
-```bash
-- op:code.review.api(strict)
-- op:write.tech.spec(concise, blog)
-- op:code.explain(line-by-line)
-```
-
-PromptOS then takes:
-
-- the DSL line,
-- contextual inputs (selected text, clipboard, extra notes),
-- and user profile,
-
-and **compiles them into a high-quality prompt** that can be sent to any LLM client.
-
-**PromptOS is:**
-
-- A **Prompt Compiler + Prompt Cookbook + DSL**, not a monolithic agent framework.
-- Focused on the **prompt generation layer**, not on tool execution or complex agent orchestration.
+- **Drafting**: Use a one-line **DSL** for lightning-fast prompting in your IDE.
+- **Compiling**: Use the **Agentic Compiler** to refine messy natural language into structured `.pos` (PromptOS) files.
+- **Distributing**: Export your logic as **Standardized Agent Skills** (`.agent/skills/`) compatible with the 2026 industry standards (GitHub Copilot, Claude Code, Cursor).
 
 ---
 
-## 2. Command DSL Overview
+## 2. Key Features (v0.2.0)
 
-PromptOS uses a flexible **Dot-Notation DSL** with the following shape:
+### ✨ Agentic Compiler (Magic Refine)
 
-Bash
+Don't know how to write the perfect prompt? Just type your intent, select it, and run `PromptOS: Refine Prompt`. The compiler uses Meta-Prompting to transform your thoughts into a production-ready instruction set.
+
+### 📦 Standardized Skill Export
+
+One-click export of any PromptOS ability to `.agent/skills/` (or `.github/skills/`).
+
+- Generates compliant `SKILL.md` with YAML frontmatter.
+- Automatically handles instruction compression to save context tokens.
+- Instantly makes your private prompts discoverable by AI Agents.
+
+### 📜 Automated History & Security
+
+- **History Manager**: Every compiled prompt is automatically versioned and saved to `.promptos/history/`.
+- **Layered Config**: Enterprise-grade configuration priority: `In-code > Env > ~/.promptos/config.json`. Keep your API keys safe and out of your source code.
+
+---
+
+## 3. Command DSL Overview
+
+PromptOS still supports the high-speed **Dot-Notation DSL**:
 
 `op:ability.id(arguments)`
 
-Where:
+| **Input String** | **Parsed ID** | **Target** |
+| --- | --- | --- |
+| `op:code.review.api(strict)` | `code.review.api` | API Design Audit |
+| `op:write.tech.spec(blog)` | `write.tech.spec` | Technical Content |
+| `op:refine(intent)` | `refine` | Trigger Compiler |
 
-- `op:`: Host-specific prefix (used in VSCode/CLI to trigger the parser).
-- `ability.id`: A dot-separated identifier for the **ability** (e.g. `code.review.api`).
-- `(arguments)` (optional): Parameters passed to the ability (e.g. `strict`, `zh-CN`).
+## 4. Roadmap
 
-Parsing Rule (Flexible Dot-Notation):
+### v0.1.0 – Offline Prompt Cookbook ✅
 
-The parser greedily matches the string before the last parenthesis as the AbilityID.
+- DSL parser & Flat Ability Registry.
+- Static template strategy.
+- Basic VSCode integration.
 
-**Examples:**
+### v0.2.0 – Agentic Compiler ✅ (Current Stable)
 
-| **Input String**                    | **Parsed ID**     | **Parsed Args** |
-| ----------------------------------- | ----------------- | --------------- |
-| `op:translate(zh-CN)`               | `translate`       | `zh-CN`         |
-| `op:code.review.api`                | `code.review.api` | `undefined`     |
-| `op:write.tech.spec(blog, concise)` | `write.tech.spec` | `blog, concise` |
+- [x]  **SDK Evolution**: Integrated `SkillExporter` and `IntentCompiler`.
+- [x]  **Standardization**: Support for `.agent/skills/` distribution.
+- [x]  **Layered Config**: Multi-provider LLM support (OpenAI, Groq, etc.).
+- [x]  **UX Upgrade**: Status bar indicators & Better error handling.
 
-> Note:
->
-> The DSL only describes the task + minimal parameters.
->
-> Large content (code, docs, notes) is passed via host context (`selectedText`, `taskNote`, etc.), **not** inside the DSL.
+### v0.3.0 – Multi-Agent & Cloud Sync (Next)
 
-For the full grammar, see **`specs/dsl-v0.1.md`**.
+- [ ]  **Headless CLI**: Run PromptOS abilities in CI/CD pipelines.
+- [ ]  **Multi-Agent Protocol**: Inter-skill communication standard.
+- [ ]  **AI Hub Integration**: Design for cloud-based skill hosting.
 
----
-
-## 3. Roadmap (v0.1.0 – v0.1.2)
-
-PromptOS evolves in three stages:
-
-### v0.1.0 – Offline Prompt Cookbook ✅ (MVP target)
-
-- [x] DSL parser (`packages/dsl-core`): New **Flexible Dot-Notation**.
-- [x] Built-in abilities (`packages/abilities`): **Flat Registry** structure.
-  - `code.explain`
-  - `code.review.api`
-  - `write.tech.spec`
-- [x] Static template strategy:
-  - `strategy = "static"`
-  - `staticPromptTemplate` for system + user prompt shapes
-- [x] Prompt generation **without any LLM dependency**:
-  - DSL + templates + selected text → final prompt (Markdown)
-- [x] VSCode extension (`apps/host-vscode`):
-  - **QuickPick** interaction model (Raycast-like ability search).
-  - Line-level DSL with `op:` prefix.
-  - Output prompt in a new Markdown tab.
-
-### v0.2.0 – Agentic Compiler (Current)
-
-- [x] `packages/llm-core`: OpenAI-compatible client & Layered Config.
-- [x] **Intent Compiler**: "Magic Refine" feature to compile natural language into .pos files.
-- [x] **History Manager**: Auto-save prompt iterations to `.promptos/history`.
-- [x] `packages/sdk`: Integrated compiler & history logic.
-
-### v0.3.0 – Cloud Sync, RAG & MCP Design
-
-- [ ] `docs/backend.md` design:
-  - Supabase schema for user profiles & custom abilities
-  - pgvector-based RAG.
-- [ ] MCP integration design:
-  - Expose abilities + RAG results as MCP tools.
-
----
-
-## 4. Monorepo Structure
-
-PromptOS is an **npm workspaces + TurboRepo** monorepo, targeting Node ≥ 18.
+**5. Monorepo Structure**
 
 ```
 promptos/
-├─ package.json              # npm workspaces root
-├─ turbo.json                # Turbo pipeline config
-│
 ├─ packages/
-│  ├─ dsl-core/              # DSL parser (Flexible Dot-Notation)
-│  ├─ abilities/             # Ability Registry (Flat List)
-│  ├─ llm-core/              # LLMClient & providers (from v0.1.1)
-│  ├─ prompt-writer/         # Prompt Writer wrapper (from v0.1.1)
-│  ├─ sdk/                   # Host-facing SDK (VSCode / CLI)
+│  ├─ dsl-core/      # The Grammar: DSL parsing & state machines.
+│  ├─ sdk/           # The Engine: Intent compiler, Skill exporter, History.
+│  ├─ llm-core/      # The Connector: Layered config & LLM clients.
+│  ├─ abilities/     # The Library: Built-in industry-standard abilities.
 │
 ├─ apps/
-│  └─ host-vscode/           # VSCode extension (MVP host)
+│  └─ host-vscode/   # The Workbench: Refine, Run, and Export UI.
 │
-├─ examples/                 # Usage examples
-└─ docs/                     # Architecture & Specs
+└─ .agent/skills/    # Self-Bootstrapped Skills (PromptOS's own AI skills).
 ```
 
----
+## 6. VSCode Extension Usage
 
-## 5. Core Concepts
+### 6.1 Refine Prompt (New in v0.2.0)
 
-### 5.1 Ability & `AbilityMeta`
+1. Select a rough idea or an existing prompt in your editor.
+2. Run `PromptOS: Refine Prompt (Compiler)`.
+3. PromptOS will use its internal LLM to "compile" your intent into a structured format.
 
-An ability is a named capability stored in a flat registry.
+### 6.2 Export as Skill (New in v0.2.0)
 
-Each ability is described by an AbilityMeta:
-
-```tsx
-export interface AbilityMeta {
-  /** Unique identifier (Primary Key), e.g. "code.review.api" */
-  id: string;
-
-  description: string;
-  argsHint?: string; // e.g. "style? (strict, concise)"
-
-  strategy: "static" | "llm";
-  staticPromptTemplate?: string;
-
-  examples?: { dsl: string; description?: string }[];
-
-  // Optional / Legacy compatibility
-  supportedLanguages?: string[];
-}
-```
-
-### 5.2 Prompt Writer
-
-The **Prompt Writer** is responsible for constructing the final **prompt text**.
-
-- **Static Strategy**: Merges `staticPromptTemplate` with inputs.
-- **LLM Strategy** (v0.1.1): Calls `LLMPromptWriter` to dynamically generate the prompt using an LLM.
-
-### 5.3 SDK & Hosts
-
-`packages/sdk` aims to provide a single function:
-
-```tsx
-export interface GeneratePromptArgs {
-  dsl: string; // e.g. "code.review.api(strict)"
-  selectedText?: string;
-  userProfile: UserProfile;
-  taskNote?: string;
-}
-
-export function generatePrompt(
-  args: GeneratePromptArgs,
-): Promise<GeneratePromptResult>;
-```
+1. Trigger the export command via Command Palette.
+2. Select your desired Ability.
+3. PromptOS generates a `.agent/skills/` package in your root directory, enabling your AI Agents (like Copilot) to "learn" this specific skill instantly.
 
 ---
 
-## 6. Configuration & Secrets
+## 7. Status
 
-### 6.1 Node / CLI / examples
-
-For pure Node use (scripts, examples), PromptOS expects environment-based configuration.
-
-packages/llm-core exposes configFromEnv() which reads:
-
-- `LLM_PROVIDER` (default `openai`)
-- `LLM_API_KEY` or `OPENAI_API_KEY`
-- `LLM_BASE_URL` (default `https://api.openai.com/v1`)
-- `LLM_MODEL` (default `gpt-4o-mini`)
-
-### 6.2 VSCode Extension
-
-LLM config resolution priority for VSCode:
-
-1. **VSCode settings**: `promptos.llm.*`
-2. **Workspace config file**: `.promptos/config.json`
-3. **Environment variables**: via `configFromEnv()` (fallback).
-
----
-
-## 7. VSCode Extension Usage
-
-The VSCode host lives in `apps/host-vscode`.
-
-### 7.1 Interaction: Raycast-like QuickPick
-
-- **Command**: `PromptOS: Generate Prompt from DSL` (`Ctrl+Alt+P`)
-- **Flow**:
-  1. Opens a **QuickPick** menu listing all available abilities (fuzzy searchable).
-  2. User selects an ability (e.g., `code.review.api`).
-  3. User inputs arguments (optional) in an InputBox.
-  4. PromptOS generates the prompt and opens it in a new tab.
-
-### 7.2 Line-level DSL: `op:`
-
-- **Command**: `PromptOS: Run DSL from Current Line` (`Ctrl+Alt+O`)
-- **Behavior**:
-  - Reads current line.
-  - If starts with `op:` (e.g., `op:code.review.api(strict)`):
-    - Parses DSL.
-    - Uses current selection as context.
-    - Generates prompt.
-
----
-
-## 8. Examples
-
-### 8.1 `code.explain`
-
-- **Goal:** Explain complex code, regex, or algorithms.
-- **DSL:** `op:code.explain(line-by-line)`
-
-### 8.2 `code.review.api`
-
-- **Goal:** Perform API-design-oriented code review.
-- **DSL:** `op:code.review.api(strict)`
-
-### 8.3 `write.tech.spec`
-
-- **Goal:** Generate technical specs or blogs.
-- **DSL:** `op:write.tech.spec(blog)`
-
----
-
-## 9. Backend, RAG & MCP (Design)
-
-The backend design is tracked in `docs/backend.md` (v0.1.2 stage):
-
-- **Supabase tables**:
-  - `profiles`: user profiles (preferences, bio, etc.)
-  - `abilities`: user-defined abilities with metadata + embeddings
-- **pgvector-based RAG**:
-  - Natural language intent → recommended `abilityId`s
-- **MCP Integration**:
-  - PromptOS backend exposes abilities as MCP tools.
-  - Clients consume them via MCP.
-
----
-
-## 10. Development Guide
-
-### 10.1 Prerequisites
-
-- Node.js ≥ 18
-- **pnpm** (Required for workspace management)
-
-### 10.2 Basic Commands
-
-From the repo root:
-
-```bash
-# Install dependencies
-pnpm install
-
-# Build all packages (Topological build via Turbo)
-pnpm run build
-
-# Run tests
-pnpm test
-
-# Lint
-pnpm run lint
-```
-
----
-
-## 11. Documentation & Language Convention
-
-- **Primary Documentation**: English (Root `README.md`, DSL specs, etc.).
-- **Optional Translations**: Chinese versions use `.zh.md` suffix (e.g., `README.zh.md`).
-- **Code Comments**: Bilingual (English + Chinese) for public APIs and complex logic.
-
----
-
-## 12. Status
-
-This repository is being implemented in incremental steps.
-
-Currently v0.1.0 MVP is active, featuring the Flexible Dot-Notation DSL and Flat Ability Registry.
-
----
-
-## 13. Packages & Naming
-
-- GitHub organization: `open-promptos`
-- npm organization / scope: `@promptos`
-
-Official npm packages are published under the `@promptos` scope:
-
-- `@promptos/dsl-core`
-- `@promptos/abilities`
-- `@promptos/llm-core`
-- `@promptos/prompt-writer`
-- `@promptos/sdk`
+**PromptOS v0.2.0** is now active. We are moving from "Managing Prompts" to "Compiling Intelligence."
